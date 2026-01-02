@@ -28,12 +28,15 @@ jobs:
     - name: Excute Test
       run: mvn clean test -Dsuite=suite -X
       
-    - name: Upload a Build Aritifact
+    - name: Upload test results
       if: always()
-      uses: actions/upload-artifact@4.4.3
+      uses: actions/upload-artifact@v3
       with:
-        name: Logs
-        path: logs/
+        name: test-results
+        path: |
+          test-output/reports/
+          target/surefire-reports/
+          logs/
 
     - name: Publish Test Report
       if: always()
